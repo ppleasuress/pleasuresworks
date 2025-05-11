@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Aesthetics</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-700">
+
+    <div class="text-center my-8">
+        <h1 class="text-5xl font-serif text-white">WOMENSWEAR</h1>
+    </div>
+
+    <div class="flex flex-row md:grid-cols-3 gap-4 p-4">
+        <!-- Card 1 -->
+        <div class="bg-white rounded-lg shadow-lg p-4">
+            <img src="q.jpg" alt="Fashion Image" class=" transition-transform duration-300 ease-in-out transform hover:scale-110" onclick="zoomImage(this)">
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="bg-white rounded-lg shadow-lg p-4">
+            <img src="w.jpg" alt="Fashion Image" class="transition-transform duration-300 ease-in-out transform hover:scale-110" onclick="zoomImage(this)">
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="bg-white rounded-lg shadow-lg p-4">
+            <img src="e.jpg" alt="Fashion Image" class="transition-transform duration-300 ease-in-out transform hover:scale-110" onclick="zoomImage(this)">
+        </div>  
+    
+        <!-- Card 4 -->
+        <div class="bg-white rounded-lg shadow-lg p-4">
+            <img src="r.jpg" alt="Fashion Image" class="transition-transform duration-300 ease-in-out transform hover:scale-110" onclick="zoomImage(this)">
+        </div>
+    
+        <!-- Card 5 -->
+        <div class="bg-white rounded-lg shadow-lg p-4">
+            <img src="t.jpg" alt="Fashion Image" class="transition-transform duration-300 ease-in-out transform hover:scale-110" onclick="zoomImage(this)">
+        </div>
+    </div>
+    
+    <div class="flex flex-row md:grid-cols-3 gap-4 p-4">
+        <!-- Card 6 -->
+        <div class="bg-white rounded-lg shadow-lg p-4">
+            <img src="tt.jpg" alt="Fashion Image" class="transition-transform duration-300 ease-in-out transform hover:scale-110" onclick="zoomImage(this)">
+        </div>
+    
+        <!-- Card 7 -->
+        <div class="bg-white rounded-lg shadow-lg p-4">
+            <img src="yy.jpg" alt="Fashion Image" class="transition-transform duration-300 ease-in-out transform hover:scale-110" onclick="zoomImage(this)">
+        </div>
+    
+        <!-- Card 8 -->
+        <div class="bg-white rounded-lg shadow-lg p-4">
+            <img src="uu.jpg" alt="Fashion Image" class="transition-transform duration-300 ease-in-out transform hover:scale-110" onclick="zoomImage(this)">
+        </div>
+    </div>
+
+    </div>
+</div>
+
+<script>
+    const images = Array.from(document.querySelectorAll('img[onclick="zoomImage(this)"]'));
+    let currentIndex = 0;
+
+    function zoomImage(img) {
+        const src = img.getAttribute("src");
+        currentIndex = images.findIndex(i => i.getAttribute("src") === src);
+        document.getElementById("lightbox-img").src = src;
+        document.getElementById("lightbox").classList.remove("hidden");
+    }
+
+    function closeLightbox() {
+        document.getElementById("lightbox").classList.add("hidden");
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        document.getElementById("lightbox-img").src = images[currentIndex].getAttribute("src");
+    }
+
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        document.getElementById("lightbox-img").src = images[currentIndex].getAttribute("src");
+    }
+
+    // Optional: Close lightbox on background click
+    document.getElementById("lightbox").addEventListener("click", function (e) {
+        if (e.target === this) closeLightbox();
+    });
+
+    // Optional: Use arrow keys to navigate
+    document.addEventListener("keydown", function (e) {
+        if (document.getElementById("lightbox").classList.contains("hidden")) return;
+        if (e.key === "ArrowRight") nextImage();
+        if (e.key === "ArrowLeft") prevImage();
+        if (e.key === "Escape") closeLightbox();
+    });
+</script>
+
+
+
+</body>
+</html>
